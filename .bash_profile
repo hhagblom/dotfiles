@@ -26,8 +26,8 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
+if which brew &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+	source "$(brew --prefix)/etc/bash_completion";
 elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
@@ -46,3 +46,25 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+complete -C '/usr/local/bin/aws_completer' aws
+
+function _makefile_targets {
+    local curr_arg;
+    local targets;
+
+    # Find makefile targets available in the current directory
+    targets=''
+    if [[ -e "$(pwd)/Makefile" ]]; then
+        targets=$( \
+            grep -oE '^[a-zA-Z0-9_-]+:' Makefile \
+                | sed 's/://' \
+                | tr '\n' ' ' \
+               )
+    fi
+
+    # Filter targets based on user input to the bash completion
+    curr_arg=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "${targets[@]}" -- $curr_arg ) );
+}
+complete -F _makefile_targets make
