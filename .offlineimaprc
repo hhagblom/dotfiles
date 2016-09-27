@@ -1,0 +1,77 @@
+[general]
+ui = TTY.TTYUI
+accounts = Personal, Work
+pythonfile=~/.mutt/offlineimap.py
+fsync = False
+
+[Account Personal]
+localrepository = Personal-Local
+remoterepository = Personal-Remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository Personal-Local]
+type = Maildir
+localfolders = ~/.mail/hagblomhp-gmail.com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository Personal-Remote]
+maxconnections = 1
+type = Gmail
+remoteuser = hagblom.hp@gmail.com
+remotepasseval = get_keychain_pass(account="hagblom.hp@gmail.com", server="imap.gmail.com")
+realdelete = yes
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+                                             'Nagios',
+                                             'Django',
+                                             'Flask',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             ]
+
+[Account Work]
+localrepository = Work-Local
+remoterepository = Work-Remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository Work-Local]
+type = Maildir
+localfolders = ~/.mail/hanspeter.hagblom-jayway.com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository Work-Remote]
+maxconnections = 1
+type = Gmail
+remoteuser = hanspeter.hagblom@jayway.com
+remotepasseval = get_keychain_pass(account="hanspeter.hagblom@jayway.com", server="imap.gmail.com")
+realdelete = yes
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+                                             'Nagios',
+                                             'Django',
+                                             'Flask',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             ]

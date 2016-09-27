@@ -47,7 +47,7 @@ complete -W "NSGlobalDomain" defaults;
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-complete -C '/usr/local/bin/aws_completer' aws
+complete -C '/usr/bin/aws_completer' aws
 
 function _makefile_targets {
     local curr_arg;
@@ -68,3 +68,7 @@ function _makefile_targets {
     COMPREPLY=( $(compgen -W "${targets[@]}" -- $curr_arg ) );
 }
 complete -F _makefile_targets make
+eval `keychain --eval --agents ssh id_rsa`
+
+GPG_TTY=$(tty)
+export GPG_TTY
