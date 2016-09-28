@@ -26,7 +26,7 @@ set thorough_search      # strip headers and eval mimes before searching
 #set sidebar_delim   = '  │'
 set sidebar_visible = yes
 set sidebar_width   = 48
-set mail_check_stats
+# set mail_check_stats
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
 color sidebar_new color221 color233
 
@@ -164,7 +164,7 @@ set realname = "Hans Peter Hagblom"
 
 folder-hook hagblomhp-gmail.com set from = "hagblom.hp@gmail.com"
 folder-hook hanspeter.hagblom-jayway.com set from = "hanspeter.hagblom@jayway.com"
-set sendmail = "/usr/local/bin/msmtp"
+set sendmail = "/usr/bin/msmtp"
 set sendmail_wait = 0
 unset record
 

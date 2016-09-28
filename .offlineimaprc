@@ -24,8 +24,8 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
 maxconnections = 1
 type = Gmail
 remoteuser = hagblom.hp@gmail.com
-remotepasseval = get_keychain_pass(account="hagblom.hp@gmail.com", server="imap.gmail.com")
-realdelete = yes
+remotepasseval = get_pass_pass(account="hagblom.hp@gmail.com", server="imap.gmail.com")
+realdelete = no
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
@@ -60,8 +60,8 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
 maxconnections = 1
 type = Gmail
 remoteuser = hanspeter.hagblom@jayway.com
-remotepasseval = get_keychain_pass(account="hanspeter.hagblom@jayway.com", server="imap.gmail.com")
-realdelete = yes
+remotepasseval = get_pass_pass(account="hanspeter.hagblom@jayway.com", server="imap.gmail.com")
+realdelete = no
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
