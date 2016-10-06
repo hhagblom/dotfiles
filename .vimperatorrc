@@ -1,0 +1,2 @@
+map gb :back<CR>
+map h :tabopen google<SPACE>

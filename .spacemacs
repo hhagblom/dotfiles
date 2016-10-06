@@ -46,9 +46,14 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages
+   '(
+     smartparens
+     )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -188,7 +193,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -260,7 +265,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (when window-system (set-exec-path-from-shell-PATH))
 
   (setenv "GOROOT" "/usr/local/go")
-  (setenv "GOPATH" "/Users/hapeha/projects/sydsvenskan/go_workspace")
+  (setenv "GOPATH" "/home/hapeha/projects/sydsvenskan/go_workspace")
   (defun my-go-mode-hook ()
     ;; Use goimports instead of go-fmt
     (setq gofmt-command "goimports")
