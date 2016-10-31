@@ -51,9 +51,9 @@
 #
 #
 # Debugging:  If you have problems set debug to 'yes'.  That will cause a debug file
-#             be written to /tmp/mutt_attach/debug so you can see what is going on.
+#             be written to /tmp/mutt_attach/debug so you can xdg-open what is going on.
 #
-# See Also:  The man pages for open, file, basename
+# xdg-open Also:  The man pages for open, file, basename
 #
 
 # the tmp directory to use.
@@ -120,8 +120,8 @@ fi
 # Otherwise we've been told what to use.  So do an open -a.
 
 if [ -z $open_with ]; then
-    see $newfile
+    xdg-open $newfile
 else
-    #see -a "$open_with" $newfile
-		see $newfile
+    #xdg-open -a "$open_with" $newfile
+		xdg-open $newfile
 fi

@@ -8,11 +8,14 @@ image/pjpeg; ~/.mutt/view_attachment.sh %s jpg
 image/png; ~/.mutt/view_attachment.sh %s png
 image/gif; ~/.mutt/view_attachment.sh %s gif
 
+
 # PDFs
 application/pdf; ~/.mutt/view_attachment.sh %s pdf
 
 # HTML
 text/html; ~/.mutt/view_attachment.sh %s html
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/view_attachment.sh %s docx
 
 # Unidentified files
 application/octet-stream; ~/.mutt/view_attachment.sh %s "-"

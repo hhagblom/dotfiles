@@ -21,6 +21,7 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             }.get(folder, folder)
 
 [Repository Personal-Remote]
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 maxconnections = 1
 type = Gmail
 remoteuser = hagblom.hp@gmail.com
@@ -57,6 +58,7 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
                             }.get(folder, folder)
 
 [Repository Work-Remote]
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 maxconnections = 1
 type = Gmail
 remoteuser = hanspeter.hagblom@jayway.com

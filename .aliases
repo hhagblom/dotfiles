@@ -162,3 +162,6 @@ alias gop='cd ~/projects/sydsvenskan/go_workspace/src/github.com/Sydsvenskan/'
 alias nb="clear && node . | bunyan"
 alias nbm="clear && nodemon -e js,json,jsx,ejs,coffee . | bunyan"
 alias nbmw="clear && nodemon -e js,json,jsx,ejs,coffee . | bunyan -l warn"
+alias f='grep -nr --exclude-dir env --exclude-dir vendor'
+alias relmerge='git merge --no-ff --edit --no-commit develop'
+alias json2yaml="python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)'"

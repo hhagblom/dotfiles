@@ -1,6 +1,6 @@
 # Paths ----------------------------------------------
 set folder           = ~/.mail               # mailbox location
-set alias_file       = ~/.mutt/alias         # where to store aliases
+#set alias_file       = ~/.mutt/alias         # where to store aliases
 set header_cache     = ~/.mutt/cache/headers # where to store headers
 set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
 set certificate_file = ~/.mutt/certificates  # where to store certs
@@ -27,7 +27,7 @@ set thorough_search      # strip headers and eval mimes before searching
 set sidebar_visible = yes
 set sidebar_width   = 48
 # set mail_check_stats
-set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+#set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
 color sidebar_new color221 color233
 
 # Status Bar -----------------------------------------
@@ -47,14 +47,14 @@ set spoolfile = "+hagblomhp-gmail.com/INBOX"
 
 # Mailboxes to show in the sidebar.
 mailboxes +hagblomhp-gmail.com/INBOX \
+          +hanspeter.hagblom-jayway.com/INBOX \
+          +temporary/search \
           +hagblomhp-gmail.com/archive \
           +hagblomhp-gmail.com/sent \
           +hagblomhp-gmail.com/drafts \
-          +hanspeter.hagblom-jayway.com/INBOX \
           +hanspeter.hagblom-jayway.com/archive \
           +hanspeter.hagblom-jayway.com/sent \
           +hanspeter.hagblom-jayway.com/drafts \
-          +temporary/search \
 # Other special folders.
 set mbox      = "+hagblomhp-gmail.com/archive"
 set postponed = "+hagblomhp-gmail.com/drafts"
@@ -182,4 +182,6 @@ bind pager N search-opposite
 # Use notmuch to perform free text searches in email
 macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch.py ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
 # When limiting show all the messages when pressing a
-macro index a "<limit>all\n" "show all messages (undo limit)"
+#macro index a "<limit>all\n" "show all messages (undo limit)"
+set query_command="abook --mutt-query '%s'"
+macro index,pager A     "|abook --add-email\n" 'add sender to abook'

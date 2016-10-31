@@ -34,21 +34,21 @@ export MANPAGER='less -X';
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
 # Environment specific stuff
 export AWS_DEFAULT_PROFILE=sydsvenskan
 
 # Set up golang
-export GOPATH=$HOME/projects/sydsvenskan/go_workspace
-export GOROOT=/usr/local/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export GOPATH=$HOME/go
+export GOROOT=/usr/lib/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Set up HOME paths for EMR Tools
 export HADOOP_HOME=~/opt/hadoop-2.7.2
 export HIVE_HOME=~/opt/apache-hive-1.2.1-bin
-export SPARK_HOME=~/opt/spark-1.6.1-bin-hadoop2.6
+export SPARK_HOME=~/opt/spark-1.6.2-bin-hadoop2.6
 
 # Add EMR tools to path
 export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$PATH
@@ -64,6 +64,5 @@ export PYSPARK_DRIVER_PYTHON_OPTS="notebook --NotebookApp.open_browser=False --N
 # Setup of the EMR analysis project and tools
 export EMR_PROJECT_DIR=~/projects/sydsvenskan/repos/burt-completes-emr
 
-source $EMR_PROJECT_DIR/.env
 source $EMR_PROJECT_DIR/.alias
 export PATH=$EMR_PROJECT_DIR/bin:$PATH

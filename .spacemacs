@@ -264,8 +264,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (when window-system (set-exec-path-from-shell-PATH))
 
-  (setenv "GOROOT" "/usr/local/go")
-  (setenv "GOPATH" "/home/hapeha/projects/sydsvenskan/go_workspace")
+  (setenv "GOROOT" "/usr/lib/go")
+  (setenv "GOPATH" "/home/hapeha/go")
   (defun my-go-mode-hook ()
     ;; Use goimports instead of go-fmt
     (setq gofmt-command "goimports")
