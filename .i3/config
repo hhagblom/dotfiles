@@ -38,6 +38,9 @@ floating_modifier $mod
 # start a terminal
 bindsym Mod4+Return exec i3-sensible-terminal
 
+bindsym $mod+i exec retina.sh
+bindsym $mod+o exec externaldisp.sh
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
