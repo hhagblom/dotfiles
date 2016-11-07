@@ -185,3 +185,5 @@ macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch.py
 #macro index a "<limit>all\n" "show all messages (undo limit)"
 set query_command="abook --mutt-query '%s'"
 macro index,pager A     "|abook --add-email\n" 'add sender to abook'
+
+source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
