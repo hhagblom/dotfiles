@@ -50,6 +50,7 @@ fi
 
 xrandr --output eDP1 --dpi 144
 xautolock -time 30 -locker "sudo pm-suspend" -detectsleep &
+feh --bg-scale /usr/share/pixmaps/wallpaper.jpg &
 
 
 exec /usr/bin/i3 

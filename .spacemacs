@@ -32,7 +32,12 @@ values."
      emacs-lisp
      git
      markdown
-     go
+     (go
+      :variables
+      go-tab-width 4
+      gofmt-command "goimports"
+      go-mode-hook 'my-go-mode-hook
+      )
      elixir
      ;; org
      ;; plantuml
@@ -281,15 +286,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (setenv "GOROOT" "/usr/lib/go")
   (setenv "GOPATH" "/home/hapeha/go")
+
   (defun my-go-mode-hook ()
     ;; Use goimports instead of go-fmt
-    (setq gofmt-command "goimports")
+    ;; (setq gofmt-command "goimports")
     ;; Call Gofmt before saving
     (add-hook 'before-save-hook 'gofmt-before-save)
-    (go :variables go-tab-width 2)
-    (setq tab-width 2)
-    (setq indent-tabs-mode t)
-    ;; (setq-default tab-width 2)
+    ;; (go :variables go-tab-width 2)
+    (setq tab-width 4)
+    ;; (setq indent-tabs-mode t)
+    (auto-complete-for-go)
+    (setq-default tab-width 4)
     ;; Customize compile command to run go build
     (if (not (string-match "go" compile-command))
         (set (make-local-variable 'compile-command)
@@ -305,10 +312,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (setq-default python-indent-current-level nil)
               (setq-default tab-width 4)
               (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-  (add-hook 'go-mode-hook 'my-go-mode-hook)
+  ;; (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-  ;;(defun auto-complete-for-go ()
-  ;;  (auto-complete-mode 1))
+  (defun auto-complete-for-go ()
+   (auto-complete-mode 1))
   ;;(add-hook 'go-mode-hook 'auto-complete-for-go)
 
   ;; Autocomplete for go

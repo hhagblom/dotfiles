@@ -59,6 +59,8 @@ ztermtitle='%n@%m:%~'
 # Uncomment to enable double-dot expansion.
 # This appends '../' to your input for each '.' you type after an initial '..'
 zdouble_dot_expand='true'
+# Supposedly this will set the default vi mode to cmd
+#zle_default_mode='cmd'
 
 #
 # Syntax-Highlighting
@@ -69,7 +71,7 @@ zdouble_dot_expand='true'
 #   https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 # For (u)rxvt, termite and gnome-terminal users,
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
-zhighlighters=(main brackets cursor)
+zhighlighters=(main brackets)
 
 
 #
@@ -90,6 +92,7 @@ zhighlighters=(main brackets cursor)
 # Load any helper scripts as defined here
 #zpacman_helper=(aur)
 
+# Use the vicmd keymap by default
 bindkey -v
 
 #KEYTIMEOUT=5
@@ -111,7 +114,10 @@ function zle-line-init() {
 zle -N zle-line-init
 
 bindkey -M viins -s 'fd' '\e'
-
+# Prepend a command in history with sudo
+bindkey -M vicmd -s 's' 'Isudo \eA'
+# Prepend the previous command with sudo
+bindkey -M vicmd -s ',s' 'kIsudo \eA'
 
 alias gll='git log --oneline --graph --decorate'
 alias mutt='cd ~/Downloads && mutt'
