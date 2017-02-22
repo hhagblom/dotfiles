@@ -17,6 +17,6 @@ text/html; ~/.mutt/view_attachment.sh %s html
 
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/view_attachment.sh %s docx
 application/vnd.oasis.opendocument.spreadsheet; libreoffice %s
-
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; libreoffice %s &
 # Unidentified files
 application/octet-stream; ~/.mutt/view_attachment.sh %s "-"

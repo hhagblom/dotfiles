@@ -33,12 +33,14 @@ values."
      git
      markdown
      go
+     elixir
      ;; org
      ;; plantuml
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
+     themes-megapack
      syntax-checking
      version-control
      )
@@ -107,22 +109,35 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    ;; dotspacemacs-themes '(misterioso spacemacs-light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
-   ;;                    solarized-light
-   ;;                    solarized-dark
-   ;;                    leuven
+   dotspacemacs-themes '(
+                         ample-flat
+                         busybee
+                         bubbleberry
+                         ;; spacemacs-dark
+                         ;; spacemacs-light
+                         ;; solarized-light
+                         ;; solarized-dark
+                         ;; leuven
+                         ;; purple-haze
+                         )
    ;;                    monokai
    ;;                    zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;;                             :size 12
+   ;;                             :weight normal
+   ;;                             :width normal
+   ;;                             :powerline-scale 1.1)
+   ;; Other font could be "Monaco" weight normal
+   ;; "Droid Sans Mono"
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 12
+                               :size 14
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.2)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -242,7 +257,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'trailing
    ))
 
 (defun dotspacemacs/user-init ()
@@ -271,6 +286,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq gofmt-command "goimports")
     ;; Call Gofmt before saving
     (add-hook 'before-save-hook 'gofmt-before-save)
+    (go :variables go-tab-width 2)
+    (setq tab-width 2)
+    (setq indent-tabs-mode t)
+    ;; (setq-default tab-width 2)
     ;; Customize compile command to run go build
     (if (not (string-match "go" compile-command))
         (set (make-local-variable 'compile-command)
@@ -286,7 +305,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (setq-default python-indent-current-level nil)
               (setq-default tab-width 4)
               (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-  ;;(add-hook 'go-mode-hook 'my-go-mode-hook)
+  (add-hook 'go-mode-hook 'my-go-mode-hook)
 
   ;;(defun auto-complete-for-go ()
   ;;  (auto-complete-mode 1))
@@ -319,6 +338,7 @@ you should place your code here."
   (global-set-key [double-wheel-down] 'ignore)
   (global-set-key [triple-wheel-up] 'ignore)
   (global-set-key [triple-wheel-down] 'ignore)
+  (spacemacs/set-leader-keys "ps" 'helm-projectile-ag)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -330,8 +350,6 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -365,6 +383,9 @@ you should place your code here."
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(package-selected-packages
+   (quote
+    (ob-elixir flycheck-mix alchemist elixir-mode zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme zeal-at-point yapfify yaml-mode ws-butler window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smeargle restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-plus-contrib org-bullets open-junk-file neotree mwim move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diff-hl define-word cython-mode company-tern company-statistics company-go company-anaconda column-enforce-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -405,5 +426,4 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(default ((t (:foreground "#bdbdb3" :background "gray13")))))

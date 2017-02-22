@@ -1,0 +1,16 @@
+\.
+bin
+brew\.sh
+init
+\.\.
+ab
+ignored\-syncfiles
+my_bootstrap\.sh
+\.git
+\.DS_Store
+\.osx
+bootstrap\.sh
+install\.sh
+README\.md
+LICENSE-MIT\.txt
+^$
