@@ -6,7 +6,7 @@ XTerm*foreground: rgb:b2/b2/b2
 XTerm*background: rgb:08/08/08
 Xterm*saveLines: 30000
 
-URxvt.font: xft:monaco:size=8
+URxvt.font: xft:monaco:size=10
 URxvt.scrollBar_right: False
 URxvt.scrollTtyOutput: False
 URxvt.scrollTtyKeypress: True

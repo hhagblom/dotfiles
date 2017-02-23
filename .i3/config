@@ -199,10 +199,10 @@ client.urgent						$urgent-bg-color $urgent-bg-color $text-color #00ff00
 
 #hide_edge_borders both
 
-font pango:System San Fransisco 10
+font pango:System San Fransisco Display 10
 bar {
 	separator_symbol " | "
-	position top
+	position bottom # other option is top
 	font pango: Awesome 10
 	status_command i3status
 	colors {
@@ -215,5 +215,5 @@ bar {
   }
 }
 
-exec compton -f
+exec compton
 exec --no-startup-id feh --bg-scale /usr/share/pixmaps/wallpaper.jpg

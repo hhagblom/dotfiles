@@ -139,7 +139,7 @@ values."
    ;; Other font could be "Monaco" weight normal
    ;; "Droid Sans Mono"
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 24
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
