@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -x
 
 external_display=$(xrandr | grep \ connected | cut -d' ' -f 1 | grep -e '^DP[0-9]')
@@ -10,5 +12,5 @@ fi
 
 
 xrandr --output eDP1 --mode "2880x1800_60.00"
-xrandr --dpi 144 
+xrandr --dpi 144
 

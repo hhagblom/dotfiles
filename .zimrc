@@ -58,7 +58,7 @@ ztermtitle='%n@%m:%~'
 
 # Uncomment to enable double-dot expansion.
 # This appends '../' to your input for each '.' you type after an initial '..'
-zdouble_dot_expand='true'
+#zdouble_dot_expand='true'
 # Supposedly this will set the default vi mode to cmd
 #zle_default_mode='cmd'
 
@@ -123,8 +123,8 @@ alias gll='git log --oneline --graph --decorate'
 alias mutt='cd ~/Downloads && mutt'
 
 
-export HISTSIZE=100000
-export SAVEHIST=100000
+export HISTSIZE=1000
+export SAVEHIST=1000
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
@@ -138,7 +138,7 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-source /usr/bin/aws_zsh_completer.sh
+#source /usr/bin/aws_zsh_completer.sh
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
@@ -149,3 +149,11 @@ alias week='date +%V'
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+
+alias ls="ls --hide='*.pyc' --color -F"
+alias l="ls -lh --hide='*pyc' --color -F"
+
+
+export TERM=xterm-256color
+
+eval `keychain --eval --agents ssh id_rsa`

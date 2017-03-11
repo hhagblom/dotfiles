@@ -24,11 +24,12 @@
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-set $bg-color #2f343f
-set $inactive-bg-color #2f343f
-set $text-color #f3f4f5
-set $inactive-text-color #676e7d
-set $urgent-bg-color #e53935
+set $bg-color #967289
+set $inactive-bg-color #727796
+set $text-color #DDDDDD
+set $inactive-text-color #AAAAAA
+set $urgent-bg-color #72967F
+set $border-color #626786
 #
 #
 # use these keys for focus, movement, and resize directions when reaching for
@@ -191,11 +192,11 @@ force_focus_wrapping no
 
 
 # Window Colors
-#                        border           background            text indicator
-client.focused					$bg-color $bg-color $text-color #00ff00
-client.unfocused				$inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive	$inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent						$urgent-bg-color $urgent-bg-color $text-color #00ff00
+#												border							background								text									indicator
+client.focused					$border-color				$bg-color									$text-color						#00ff00
+client.unfocused				$border-color				$inactive-bg-color				$inactive-text-color	#00ff00
+client.focused_inactive	$border-color				$inactive-bg-color				$inactive-text-color	#00ff00
+client.urgent						$border-color				$urgent-bg-color					$text-color						#00ff00
 
 #hide_edge_borders both
 
@@ -206,14 +207,14 @@ bar {
 	font pango: Awesome 10
 	status_command i3status
 	colors {
-		background $bg-color
+		background $inactive-bg-color
 		separator #757575
 #												border							background					text
-		focused_workspace 	$bg-color 					$bg-color 					$text-color
-		inactive_workspace 	$inactive-bg-color 	$inactive-bg-color 	$inactive-text-color
+		focused_workspace 	$border-color				$bg-color 					$text-color
+		inactive_workspace 	$border-color 			$inactive-bg-color 	$inactive-text-color
 		urgent_workspace 		$urgent-bg-color 		$urgent-bg-color 		$text-color
   }
 }
 
-exec compton
+#exec compton
 exec --no-startup-id feh --bg-scale /usr/share/pixmaps/wallpaper.jpg
