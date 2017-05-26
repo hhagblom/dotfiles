@@ -48,11 +48,16 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Set up HOME paths for EMR Tools
 export HADOOP_HOME=~/opt/hadoop-2.7.2
 export HIVE_HOME=~/opt/apache-hive-1.2.1-bin
-export SPARK_HOME=~/opt/spark-1.6.2-bin-hadoop2.6
+#export SPARK_HOME=~/opt/spark-1.6.2-bin-hadoop2.6
+export SPARK_HOME=~/opt/spark-2.1.0-bin-hadoop2.7
 
 # Add EMR tools to path
 export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$PATH
 export PYTHONPATH=$SPARK_HOME/python/pyspark:$SPARK_HOME/python/lib/py4j-0.9-src.zip
+
+export MAVEN_HOME=$HOME/opt/apache-maven-3.5.0
+
+export PATH=$MAVEN_HOME/bin:$PATH
 
 # Add Mutt to execution path
 export PATH=$PATH:~/.mutt/

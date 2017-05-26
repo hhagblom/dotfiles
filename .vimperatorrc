@@ -1,2 +1,8 @@
 map gb :back<CR>
 map h :tabopen google<SPACE>
+
+autocmd LocationChange .*                             js modes.passAllKeys = false
+autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+autocmd LocationChange .*/notebooks/.*                js modes.passAllKeys = true
+ignorekeys add mail.yahoo.com
+ignorekeys add mail.google.com

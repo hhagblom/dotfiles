@@ -24,12 +24,12 @@
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-set $bg-color #967289
-set $inactive-bg-color #727796
-set $text-color #DDDDDD
-set $inactive-text-color #AAAAAA
-set $urgent-bg-color #72967F
-set $border-color #626786
+set $bg-color #FFFF00
+set $inactive-bg-color #555500
+set $text-color #000000
+set $inactive-text-color #FFFFFF
+set $urgent-bg-color #DD00FF
+set $border-color #444400
 #
 #
 # use these keys for focus, movement, and resize directions when reaching for
@@ -48,7 +48,8 @@ bindsym Mod4+Return exec i3-sensible-terminal
 
 bindsym $mod+i exec retina.sh
 bindsym $mod+o exec externaldisp.sh
-
+bindsym $mod+t exec toggle_trackpad.sh
+bindsym $mod+y exec i3lock
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -217,4 +218,4 @@ bar {
 }
 
 #exec compton
-exec --no-startup-id feh --bg-scale /usr/share/pixmaps/wallpaper.jpg
+#exec --no-startup-id feh --bg-scale /usr/share/pixmaps/wallpaper.jpg

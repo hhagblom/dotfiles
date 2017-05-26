@@ -21,7 +21,7 @@ echo "External Display was connected at port $external_display"
 
 if [ $HDMI -eq 1 ]; then
 	xrandr --output $external_display --preferred --primary 
-	xrandr --dpi 96
+	xrandr --dpi 72 # This is good for the dell screen at jayway
 else
 	xrandr --output $external_display --mode "2560x1440" --primary
 	xrandr --dpi 96
