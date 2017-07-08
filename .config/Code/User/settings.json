@@ -1,0 +1,129 @@
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "workbench.activityBar.visible": true,
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["f", "d"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["<Space>"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.showCommands",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["leader", "e", "n"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.marker.next",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["leader", "e", "p"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.marker.prev",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["leader", "r", "n"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.rename",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [",", "t", "c"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "go.test.cursor",
+                    "args": []
+                }
+            ]
+        },
+
+        {
+            "before": [",", "t", "a"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "go.test.workspace",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [",", "t", "t"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "go.test.previous",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [",", "t", "t"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "go.toggle.test.file",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [",", "t", "d"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "go.debug.startSession",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["f", "d"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.leader": ",",
+    "window.zoomLevel": 0,
+    "workbench.statusBar.visible": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "files.autoSave": "onFocusChange",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.quickSuggestionsDelay": 100,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.cursorBlinking": "solid",
+    "workbench.editor.showTabs": true,
+    "workbench.editor.enablePreview": false,
+    "window.restoreFullscreen": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "vim.useSystemClipboard": true,
+    "[go]": {
+    },
+    "workbench.colorTheme": "Monokai",
+    "extensions.ignoreRecommendations": false
+}

@@ -15,6 +15,7 @@ for file in $(\ls -a | xargs -0  echo | sed -e 's/^[[:space:]]*//' | sed -e 's/[
 		ln -s $DIR/$file $HOME/$file
 	else
 		echo "File does not exist"
+		ln -s $DIR/$file $HOME/$file
 	fi
 
 done

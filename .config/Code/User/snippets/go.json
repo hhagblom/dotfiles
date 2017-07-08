@@ -1,0 +1,54 @@
+{
+/*
+	// Place your snippets for Go here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	"Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	}
+*/
+	"Return error" : {
+		"prefix": "rerr",
+		"body": [
+			"if err != nil {",
+			"\treturn $1err",
+			"}",
+			"$2"
+		],
+		"description": "Return error to caller"
+	},
+
+	"Log error" : {
+		"prefix": "lerr",
+		"body": [
+			"ilog.WithError(logger, \"$1\", err)",
+			"$2"
+		],
+		"description": "Log something on warning level"
+	},
+	"Log warning" : {
+		"prefix": "lwarn",
+		"body": [
+			"ilog.Warning(logger, \"$1\")",
+			"$2"
+		],
+		"description": "Log something on warning level"
+	},
+	"Log Info" : {
+		"prefix": "linfo",
+		"body": [
+			"ilog.Info(logger, \"$1\")",
+			"$2"
+		],
+		"description": "Log something on info level"
+	}
+
+
+}

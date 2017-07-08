@@ -13,3 +13,8 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 .cache
+.vim/swaps
+.vim/plugged
+.mutt/cache
+.mutt/temp
+.vim/.netrwhist

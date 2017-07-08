@@ -48,6 +48,7 @@ set spoolfile = "+hagblomhp-gmail.com/INBOX"
 # Mailboxes to show in the sidebar.
 mailboxes +hagblomhp-gmail.com/INBOX \
           +hanspeter.hagblom-jayway.com/INBOX \
+					+hans-peter.hagblom-hdsydsvenskan.se/INBOX \
           +temporary/search \
           +hagblomhp-gmail.com/archive \
           +hagblomhp-gmail.com/sent \
@@ -55,6 +56,9 @@ mailboxes +hagblomhp-gmail.com/INBOX \
           +hanspeter.hagblom-jayway.com/archive \
           +hanspeter.hagblom-jayway.com/sent \
           +hanspeter.hagblom-jayway.com/drafts \
+          +hans-peter.hagblom-hdsydsvenskan.se/archive \
+          +hans-peter.hagblom-hdsydsvenskan.se/sent \
+          +hans-peter.hagblom-hdsydsvenskan.se/drafts \
 # Other special folders.
 set mbox      = "+hagblomhp-gmail.com/archive"
 set postponed = "+hagblomhp-gmail.com/drafts"
@@ -164,6 +168,7 @@ set realname = "Hans Peter Hagblom"
 
 folder-hook hagblomhp-gmail.com set from = "hagblom.hp@gmail.com"
 folder-hook hanspeter.hagblom-jayway.com set from = "hanspeter.hagblom@jayway.com"
+folder-hook hans-peter.hagblom-hdsydsvenskan.se set from = "hans-peter.hagblom@hdsydsvenskan.se"
 set sendmail = "/usr/bin/msmtp"
 set sendmail_wait = 0
 unset record

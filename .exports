@@ -38,7 +38,8 @@ export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
 # Environment specific stuff
-export AWS_DEFAULT_PROFILE=sydsvenskan
+export AWS_PROFILE=sydsvenskan
+
 
 # Set up golang
 export GOPATH=$HOME/go
@@ -69,5 +70,5 @@ export PYSPARK_DRIVER_PYTHON_OPTS="notebook --NotebookApp.open_browser=False --N
 # Setup of the EMR analysis project and tools
 export EMR_PROJECT_DIR=~/projects/sydsvenskan/repos/burt-completes-emr
 
-source $EMR_PROJECT_DIR/.alias
+#source $EMR_PROJECT_DIR/.alias
 export PATH=$EMR_PROJECT_DIR/bin:$PATH
