@@ -69,7 +69,7 @@ function _makefile_targets {
     COMPREPLY=( $(compgen -W "${targets[@]}" -- $curr_arg ) );
 }
 complete -F _makefile_targets make
-eval `keychain --eval --agents ssh id_rsa`
+eval `keychain --eval --agents ssh id_rsa cambrian.key`
 
 GPG_TTY=$(tty)
 export GPG_TTY

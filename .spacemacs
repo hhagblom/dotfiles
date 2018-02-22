@@ -31,8 +31,10 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csv
      sql
      html
+     olivetti
      (python
       :variables
       python-tab-width 4
@@ -50,15 +52,25 @@ values."
      dash
      better-defaults
      javascript
+     react
      emacs-lisp
      git
      markdown
-     org
-     journal
+     ;;journal
+     (org
+      :variables
+      org-babel-load-languages '((emacs-lisp . t)
+                                 (python . t)
+                                 ;; (go . t)
+                                 ;; (sh . t)
+                                 )
+
+      )
      (go
       :variables
       go-tab-width 4
       gofmt-command "goimports"
+      go-use-gometalinter nil
       go-mode-hook 'my-go-mode-hook
       )
      elixir
@@ -150,6 +162,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         monokai
                          subatomic256
                          ample-zen
                          ample
@@ -162,7 +175,6 @@ values."
                          busybee
                          ;; spacemacs-dark
                          ;; spacemacs-light
-                         monokai
                          )
    ;; purple-haze
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -174,7 +186,7 @@ values."
    ;; Ubuntu Mono Regular
    ;; Go Mono
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -331,7 +343,8 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'reverse)
   ;; Make sure that path variables are picked up from the shell
   (defun set-exec-path-from-shell-PATH ()
     (let ((path-from-shell (replace-regexp-in-string
@@ -352,19 +365,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; (setq gofmt-command "goimports")
     ;; Call Gofmt before saving
     (add-hook 'before-save-hook 'gofmt-before-save)
-    ;; (go :variables go-tab-width 2)
-    (setq tab-width 4)
-    ;; (setq indent-tabs-mode t)
-    (auto-complete-for-go)
-    (setq-default tab-width 4)
+    ;; (auto-complete-for-go)
     ;; Customize compile command to run go build
     (if (not (string-match "go" compile-command))
         (set (make-local-variable 'compile-command)
              "go build -v && go test -v && go vet"))
                                         ; Go oracle
-    (load-file "$GOPATH/src/golang.org/x/tools/cmd/oracle/oracle.el")
+   ;;(load-file "$GOPATH/src/golang.org/x/tools/cmd/oracle/oracle.el")
     ;; Godef jump key binding
     (local-set-key (kbd "M-.") 'godef-jump))
+
   (add-hook 'python-mode-hook
             (lambda ()
               ;;(setq electric-indent-chars '(?\n))
@@ -372,15 +382,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (setq-default python-indent-current-level nil)
               (setq-default tab-width 4)
               (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-  ;; (add-hook 'go-mode-hook 'my-go-mode-hook)
-
-  (defun auto-complete-for-go ()
-   (auto-complete-mode 1))
-  ;;(add-hook 'go-mode-hook 'auto-complete-for-go)
-
-  ;; Autocomplete for go
-  ;;(eval-after-load 'go-mode
-  ;;  '(progn (require 'go-autocomplete)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -402,23 +403,33 @@ you should place your code here."
   (global-set-key [triple-wheel-up] 'ignore)
   (global-set-key [triple-wheel-down] 'ignore)
   (spacemacs/set-leader-keys "ps" 'helm-projectile-ag)
-  ;; (message (shell-command-to-string "echo -n $(pass Personal/MobileOrg)"))
+
   (with-eval-after-load 'org
     ;; here goes your Org config :)
     ;; ....
-                                        ; Set to the location of your Org files on your local system
+    ;; Set to the location of your Org files on your local system
     (setq org-directory "~/org")
     ;; Set to the name of the file where new notes will be stored
     (setq org-mobile-inbox-for-pull "~/org/flagged.org")
     ;; Set to <your Dropbox root directory>/MobileOrg.
     (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
     ;; Enable encryption
-    (setq org-mobile-use-encryption t)
+    (setq org-mobile-use-encryption nil)
     ;; Set a password
-    (setq org-mobile-encryption-password (shell-command-to-string "echo -n $(pass MobileOrg)"))
-    ;; (setq org-mobile-encryption-password "pass")
-    (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
-    (setq org-mobile-files (file-expand-wildcards "~/org/*.org"))
+    ;; (setq org-mobile-encryption-password (shell-command-to-string "echo -n $(pass Personal/MobileOrg)"))
+    (setq org-agenda-files (file-expand-wildcards "~/org/*-todo.org"))
+    (setq org-mobile-files (file-expand-wildcards "~/org/*-todo.org"))
+    (setq org-enforce-todo-dependencies t)
+    (setq org-agenda-dim-blocked-tasks 'invisible)
+    (setq org-enforce-todo-checkbox-dependencies t)
+    ;; (org-babel-d;; o-load-languages
+     ;; 'org-babel-load-languages
+     ;; '((emacs-lisp . t)
+     ;;   (sh . t)
+     ;;   (shell . t)
+     ;;   (perl . t)
+     ;;   (python . t)
+     ;;   (go . t)))
   )
 )
 ;; Do not write anything past this comment. This is where Emacs will
@@ -428,12 +439,31 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-custom-commands
+   (quote
+    (("p" "Agenda and NEXT Items"
+      ((todo "NEXT" nil)
+       (agenda ""
+               ((org-agenda-overriding-header "This Week"))))
+      nil nil)
+     ("wn" "Work NEXT" todo "NEXT"
+      ((org-agenda-overriding-header "")
+       (org-agenda-files
+        (quote
+         ("work-todo.org")))))
+     ("e" "Errands" tags-todo "ERRAND"
+      ((org-agenda-overriding-header "Errands"))))))
  '(org-agenda-files
    (quote
-    ("~/org/GoPresentation.org" "~/org/data_science.org" "~/org/flagged.org" "~/org/index.org" "~/org/notes.org" "~/org/personal-todo.org" "~/org/professional-todo.org" "~/org/sydsvenskan_notes.org" "~/org/work-todo.org")))
+    ("~/org/personal-todo.org" "~/org/professional-todo.org" "~/org/work-todo.org")))
+ '(org-log-into-drawer t)
+ '(org-refile-allow-creating-parent-nodes (quote confirm))
+ '(org-refile-targets (quote ((org-agenda-files :level . 1))))
+ '(org-refile-use-outline-path (quote file))
  '(package-selected-packages
    (quote
-    (sql-indent org-journal web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme zeal-at-point yaml-mode web-beautify smeargle orgit org-projectile org-present org-pomodoro alert log4e gntp org-download ob-elixir org mwim mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc htmlize helm-gitignore helm-dash helm-company helm-c-yasnippet go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck-mix flycheck evil-magit magit magit-popup git-commit with-editor dash async diff-hl company-tern dash-functional tern company-statistics company-go go-mode company-anaconda coffee-mode auto-yasnippet yasnippet alchemist company elixir-mode ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (white-sand-theme rebecca-theme org-mime exotica-theme csv-mode olivetti flycheck-gometalinter sql-indent org-journal web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme zeal-at-point yaml-mode web-beautify smeargle orgit org-projectile org-present org-pomodoro alert log4e gntp org-download ob-elixir org mwim mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc htmlize helm-gitignore helm-dash helm-company helm-c-yasnippet go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck-mix flycheck evil-magit magit magit-popup git-commit with-editor dash async diff-hl company-tern dash-functional tern company-statistics company-go go-mode company-anaconda coffee-mode auto-yasnippet yasnippet alchemist company elixir-mode ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+ '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

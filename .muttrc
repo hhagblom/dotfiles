@@ -191,4 +191,5 @@ macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch.py
 set query_command="abook --mutt-query '%s'"
 macro index,pager A     "|abook --add-email\n" 'add sender to abook'
 
-source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+#source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+color index         color235        color160        "~D"                        # deleted messages

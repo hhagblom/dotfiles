@@ -3,7 +3,7 @@
 set -x
 
 echo "Trying to enable external display"
-external_display=$(xrandr | grep \ connected | cut -d' ' -f 1 | grep -e '^DP[0-9]')
+external_display=$(xrandr | grep \ connected | cut -d' ' -f 1 | grep -e '^DP[0-9]-1')
 DP_Found=$?
 
 
@@ -13,7 +13,7 @@ if [ -z $external_display ]; then
 fi
 
 if [ -z $external_display ]; then
-	i3-nagbar -m 'External display does not seem to be connected' -t warning&
+	i3-nagbar -m 'External display does not seem to be connected' -t warning
 	exit 1
 fi
 

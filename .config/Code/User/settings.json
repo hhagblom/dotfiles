@@ -1,6 +1,6 @@
 {
     "vim.disableAnnoyingNeovimMessage": true,
-    "workbench.activityBar.visible": true,
+    "workbench.activityBar.visible": false,
     "vim.otherModesKeyBindingsNonRecursive": [
         {
             "before": ["f", "d"],
@@ -106,7 +106,7 @@
     ],
     "vim.leader": ",",
     "window.zoomLevel": 0,
-    "workbench.statusBar.visible": true,
+    "workbench.statusBar.visible": false,
     "editor.renderWhitespace": "none",
     "editor.renderControlCharacters": false,
     "files.autoSave": "onFocusChange",
@@ -124,6 +124,6 @@
     "vim.useSystemClipboard": true,
     "[go]": {
     },
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Quiet Light",
     "extensions.ignoreRecommendations": false
 }

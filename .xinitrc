@@ -33,7 +33,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 xrandr --output eDP1 --dpi 96
-xautolock -time 30 -locker "sudo pm-suspend" -detectsleep &
+# Autolock
+# xautolock -time 30 -locker "sudo pm-suspend" -detectsleep &
+# To be able to do brightness up and down
+/usr/bin/sxhkd &
 feh --bg-scale /usr/share/pixmaps/wallpaper.jpg &
 
-exec /usr/bin/i3 
+#exec /usr/bin/i3
+exec /usr/bin/startkde

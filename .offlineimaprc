@@ -1,6 +1,6 @@
 [general]
 ui = TTY.TTYUI
-accounts = Personal, Work, HDS
+accounts = Personal, HDS
 pythonfile=~/.mutt/offlineimap.py
 fsync = False
 
@@ -41,42 +41,42 @@ folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
                                              '[Gmail]/Spam',
                                              ]
 
-[Account Work]
-localrepository = Work-Local
-remoterepository = Work-Remote
-#status_backend = sqlite
-postsynchook = notmuch new
-
-[Repository Work-Local]
-type = Maildir
-localfolders = ~/.mail/hanspeter.hagblom-jayway.com
-nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
-                            'sent':    '[Gmail]/Sent Mail',
-                            'flagged': '[Gmail]/Starred',
-                            'trash':   '[Gmail]/Trash',
-                            'archive': '[Gmail]/All Mail',
-                            }.get(folder, folder)
-
-[Repository Work-Remote]
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-maxconnections = 1
-type = Gmail
-remoteuser = hanspeter.hagblom@jayway.com
-remotepasseval = get_pass_pass(account="hanspeter.hagblom@jayway.com", server="imap.gmail.com")
-realdelete = no
-nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
-                            '[Gmail]/Sent Mail': 'sent',
-                            '[Gmail]/Starred':   'flagged',
-                            '[Gmail]/Trash':     'trash',
-                            '[Gmail]/All Mail':  'archive',
-                            }.get(folder, folder)
-folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
-                                             'Nagios',
-                                             'Django',
-                                             'Flask',
-                                             '[Gmail]/Important',
-                                             '[Gmail]/Spam',
-                                             ]
+#[Account Work]
+#localrepository = Work-Local
+#remoterepository = Work-Remote
+##status_backend = sqlite
+#postsynchook = notmuch new
+#
+#[Repository Work-Local]
+#type = Maildir
+#localfolders = ~/.mail/hanspeter.hagblom-jayway.com
+#nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+#                            'sent':    '[Gmail]/Sent Mail',
+#                            'flagged': '[Gmail]/Starred',
+#                            'trash':   '[Gmail]/Trash',
+#                            'archive': '[Gmail]/All Mail',
+#                            }.get(folder, folder)
+#
+#[Repository Work-Remote]
+#sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+#maxconnections = 1
+#type = Gmail
+#remoteuser = hanspeter.hagblom@jayway.com
+#remotepasseval = get_pass_pass(account="hanspeter.hagblom@jayway.com", server="imap.gmail.com")
+#realdelete = no
+#nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+#                            '[Gmail]/Sent Mail': 'sent',
+#                            '[Gmail]/Starred':   'flagged',
+#                            '[Gmail]/Trash':     'trash',
+#                            '[Gmail]/All Mail':  'archive',
+#                            }.get(folder, folder)
+#folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+#                                             'Nagios',
+#                                             'Django',
+#                                             'Flask',
+#                                             '[Gmail]/Important',
+#                                             '[Gmail]/Spam',
+#                                             ]
 [Account HDS]
 localrepository = HDS-Local
 remoterepository = HDS-Remote

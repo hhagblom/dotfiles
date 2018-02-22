@@ -28,6 +28,7 @@ export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+export XDG_CONFIG_HOME=~/.config/
 
 
 ### LESS ###
@@ -39,6 +40,7 @@ export LESS=" -R "
 
 # Environment specific stuff
 export AWS_PROFILE=sydsvenskan
+export AWS_REGION=eu-west-1
 
 
 # Set up golang
@@ -51,9 +53,10 @@ export HADOOP_HOME=~/opt/hadoop-2.7.2
 export HIVE_HOME=~/opt/apache-hive-1.2.1-bin
 #export SPARK_HOME=~/opt/spark-1.6.2-bin-hadoop2.6
 export SPARK_HOME=~/opt/spark-2.1.0-bin-hadoop2.7
+export NODE_HOME=~/opt/node-v8.9.2-linux-x64
 
 # Add EMR tools to path
-export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$PATH
+export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$NODE_HOME/bin:$PATH
 export PYTHONPATH=$SPARK_HOME/python/pyspark:$SPARK_HOME/python/lib/py4j-0.9-src.zip
 
 export MAVEN_HOME=$HOME/opt/apache-maven-3.5.0
@@ -72,3 +75,13 @@ export EMR_PROJECT_DIR=~/projects/sydsvenskan/repos/burt-completes-emr
 
 #source $EMR_PROJECT_DIR/.alias
 export PATH=$EMR_PROJECT_DIR/bin:$PATH
+export RESTIC_REPOSITORY=s3:s3.amazonaws.com/hapeha-work-computer-backup
+
+# Ruby Setup
+export PATH=$PATH:$HOME/.gem/ruby/2.5.0/bin
+export GPG_TTY=$(tty)
+
+TEXLIVE=/home/hapeha/texlive
+export PATH=/home/hapeha/texlive/bin/x86_64-linux:$PATH
+export MANPATH=/home/hapeha/texlive/texmf-dist/doc/man:
+export INFOPATH=/home/hapeha/texlive/texmf-dist/doc/info:
