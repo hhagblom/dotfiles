@@ -35,7 +35,7 @@ export XDG_CONFIG_HOME=~/.config/
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
 # Environment specific stuff
@@ -45,18 +45,18 @@ export AWS_REGION=eu-west-1
 
 # Set up golang
 export GOPATH=$HOME/go
-export GOROOT=/usr/lib/go
+export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Set up HOME paths for EMR Tools
 export HADOOP_HOME=~/opt/hadoop-2.7.2
 export HIVE_HOME=~/opt/apache-hive-1.2.1-bin
 #export SPARK_HOME=~/opt/spark-1.6.2-bin-hadoop2.6
-export SPARK_HOME=~/opt/spark-2.1.0-bin-hadoop2.7
+export SPARK_HOME=~/opt/spark-2.4.3-bin-hadoop2.7
 export NODE_HOME=~/opt/node-v8.9.2-linux-x64
 
 # Add EMR tools to path
-export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$NODE_HOME/bin:$PATH
+export PATH=$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$NODE_HOME/bin:$PATH:$HOME/.local/bin
 export PYTHONPATH=$SPARK_HOME/python/pyspark:$SPARK_HOME/python/lib/py4j-0.9-src.zip
 
 export MAVEN_HOME=$HOME/opt/apache-maven-3.5.0
@@ -85,3 +85,4 @@ TEXLIVE=/home/hapeha/texlive
 export PATH=/home/hapeha/texlive/bin/x86_64-linux:$PATH
 export MANPATH=/home/hapeha/texlive/texmf-dist/doc/man:
 export INFOPATH=/home/hapeha/texlive/texmf-dist/doc/info:
+export DISPLAY=:0.0

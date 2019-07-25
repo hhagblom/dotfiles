@@ -2,8 +2,9 @@
 "
 "
 call plug#begin()
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+"Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 " Plug 'elxir-editors/vim-elixir'
 " Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'SirVer/ultisnips'
@@ -27,6 +28,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'chriskempson/base16-vim'
 Plug 'rking/ag.vim'
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 " }}}
 set shell=bash
@@ -36,6 +38,8 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+let g:molokai_original = 0
+colorscheme molokai
 "" unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -73,8 +77,8 @@ if $TERM == "xterm-256color"
 	set t_Co=256
 endif
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-default-dark
+" let base16colorspace=256  " Access colors present in 256 colorspace
+" colorscheme base16-default-dark
 " Solarized Theme
 " Enable syntax highlighting
 " colorscheme fairyfloss
@@ -106,9 +110,9 @@ set gdefault
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
 " Change mapleader
-let mapleader=","
+let mapleader=" "
 
-let maplocalleader=",,"
+let maplocalleader=","
 
 " let g:agprg="<custom-ag-path-goes-here> --column"
 " Don’t add empty newlines at the end of files
@@ -259,6 +263,7 @@ vnoremap fd <Esc>
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
+nnoremap <leader>c :Bclose<CR>
 
 " Automatically show type info after 100 ms
 set updatetime=100
@@ -372,7 +377,7 @@ endfunction
 
 augroup go_cmds
 
-autocmd FileType go setlocal omnifunc=gocomplete#Complete
+autocmd FileType go setlocal omnifunc=go#complete#Complete
 autocmd FileType go set noexpandtab
 
 autocmd FileType go nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
@@ -409,22 +414,22 @@ augroup END
 augroup python_cmds
     autocmd Filetype python setlocal shiftwidth=2 tabstop=2 expandtab
     au BufNewFile,BufRead *.py
-        \ set tabstop=4
-        \ set softtabstop=4
-        \ set shiftwidth=4
-        \ set textwidth=79
-        \ set expandtab
-        \ set autoindent
-        \ set fileformat=unix
+        \ setlocal tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+        \ textwidth=79
+        \ expandtab
+        \ autoindent
+        \ fileformat=unix
 " sw=2 sts=2 et
  augroup END
 " }}}
 
 augroup web_cmds
-au BufNewFile,BufRead *.js, *.html, *.css *.yaml *.yml
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+    au BufNewFile,BufRead *.js,*.html,*.css,*.yaml,*.yml
+            \ setlocal tabstop=2
+            \ softtabstop=2
+            \ shiftwidth=2
 augroup END
 
 "augroup yaml

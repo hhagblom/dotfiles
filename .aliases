@@ -155,6 +155,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias reload="exec $SHELL -l"
 
 alias gl='git log --oneline --graph --decorate'
+alias addnw="git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -"
 alias mutt='cd ~/Downloads && mutt'
 
 alias gop='cd ~/projects/sydsvenskan/go_workspace/src/github.com/Sydsvenskan/'

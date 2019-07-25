@@ -37,6 +37,9 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
 
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)
