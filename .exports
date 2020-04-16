@@ -21,7 +21,7 @@ export HISTCONTROL='ignoreboth';
 
 # Prefer US English and use UTF-8.
 #export LANG='en_US.UTF-8';
-#export LC_ALL='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
 
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";
@@ -35,12 +35,9 @@ export XDG_CONFIG_HOME=~/.config/
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-export LESS=" -R "
-
-# Environment specific stuff
-export AWS_PROFILE=sydsvenskan
-export AWS_REGION=eu-west-1
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
+export LESS=" -R -X -F"
 
 
 # Set up golang
@@ -81,8 +78,12 @@ export RESTIC_REPOSITORY=s3:s3.amazonaws.com/hapeha-work-computer-backup
 export PATH=$PATH:$HOME/.gem/ruby/2.5.0/bin
 export GPG_TTY=$(tty)
 
-TEXLIVE=/home/hapeha/texlive
-export PATH=/home/hapeha/texlive/bin/x86_64-linux:$PATH
-export MANPATH=/home/hapeha/texlive/texmf-dist/doc/man:
-export INFOPATH=/home/hapeha/texlive/texmf-dist/doc/info:
-export DISPLAY=:0.0
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home"
+export PATH=$JAVA_HOME/bin:$PATH
+export JAVA_TOOL_OPTIONS=-Djavax.net.ssl.trustStore=/Library/Java/Home/lib/security/cacerts
+# Could try to set the following as well -Djavax.net.ssl.trustStoreType=KeychainStore
+
+export PATH=~/anaconda3/bin:$PATH
+# Make sure the curl version from brew is the one that is installed (comes with keychain support)
+export PATH="/usr/local/bin:/usr/local/opt/curl/bin:$PATH"
+eval "$(pyenv init -)"
