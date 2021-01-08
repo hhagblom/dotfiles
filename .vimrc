@@ -9,8 +9,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'Shougo/neocomplete.vim'
+Plug 'chriskempson/base16-vim'
+"Plug 'Shougo/neocomplete.vim'
 "Plug 'Valloric/YouCompleteMe'
 " Plug 'alessandroyorba/despacio'
 " Plug 'aklt/plantuml-syntax'
@@ -26,7 +26,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'chriskempson/base16-vim'
 Plug 'rking/ag.vim'
 Plug 'davidhalter/jedi-vim'
 call plug#end()
@@ -38,8 +37,6 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:molokai_original = 0
-colorscheme molokai
 "" unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -72,31 +69,20 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 
 " {{{ Theme settings
 "
+
+set background=dark
 syntax enable
-if $TERM == "xterm-256color"
-	set t_Co=256
+if $TERM =~ '^xterm\\|rxvt\\|screen'
+    set t_Co=256
 endif
 
-" let base16colorspace=256  " Access colors present in 256 colorspace
-" colorscheme base16-default-dark
-" Solarized Theme
-" Enable syntax highlighting
-" colorscheme fairyfloss
-" colorscheme nordisk
-"let g:despacio_Twilight = 1
-"colorscheme despacio
-" set background=dark
-" colorscheme solarized
-" let g:solarized_termtrans=1
-" let g:solarized_termcolors=256
-"call togglebg#map("<F5>")
+" let base16colorspace=256
+colorscheme base16-default-dark
 " }}}
-"
-
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamedplus
+set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
@@ -195,7 +181,7 @@ set title
 set showcmd
 " Use relative line numbers
 " if exists("&relativenumber")
-"	set relativenumber
+set relativenumber
 "	au BufReadPost * set relativenumber
 " endif
 " Start scrolling three lines before the horizontal window border

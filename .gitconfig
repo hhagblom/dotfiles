@@ -183,7 +183,7 @@
 
 [user]
 	name = Hans Peter Hagblom
-	email = hanspeter.hagblom@jayway.com
+	email = hans-peter.hagblom@zmartagroup.com
 [credential]
 	helper = !aws --profile personal codecommit credential-helper $@
 	UseHttpPath = true

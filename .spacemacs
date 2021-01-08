@@ -32,9 +32,13 @@ values."
    dotspacemacs-configuration-layers
    '(
      csv
-     sql
+     (sql
+      :variables
+      sql-backend 'lsp
+      sql-lsp-sqls-workspace-config-path 'workspace
+      sql-capitalize-keywords-disable-interactive t
+      sql-capitalize-keywords-blacklist '("name"))
      html
-     olivetti
      scala
      (python
       :variables
@@ -49,20 +53,24 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
+     (auto-completion
+      :variables
+      auto-completion-tab-key-behavior 'cycle)
      dash
      better-defaults
-     javascript
-     react
+     ;;javascript
      emacs-lisp
      git
      markdown
+     (terraform
+      :variables terraform-auto-format-on-save t)
      ;;journal
      (org
       :variables
       org-babel-load-languages '((emacs-lisp . t)
                                  (python . t)
-                                 ;; (go . t)
+                                 (sql . t)
+                                 ;;(go . t)
                                  ;; (sh . t)
                                  )
 
@@ -74,7 +82,7 @@ values."
       go-use-gometalinter nil
       go-mode-hook 'my-go-mode-hook
       )
-     elixir
+     ;; elixir
      yaml
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -345,6 +353,11 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (require 'uniquify)
+  (setq sql-postgres-login-params
+         '((user :default "redshift_master")
+           (database :default "dwh")
+           (server :default "dwh.cd0dyjvmmnyj.eu-west-1.redshift.amazonaws.com")
+           (port :default 5439)))
   (setq uniquify-buffer-name-style 'reverse)
   ;; Make sure that path variables are picked up from the shell
   (defun set-exec-path-from-shell-PATH ()
@@ -442,8 +455,7 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-custom-commands
-   (quote
-    (("p" "Agenda and NEXT Items"
+   '(("p" "Agenda and NEXT Items"
       ((todo "NEXT" nil)
        (agenda ""
                ((org-agenda-overriding-header "This Week"))))
@@ -451,24 +463,21 @@ you should place your code here."
      ("wn" "Work NEXT" todo "NEXT"
       ((org-agenda-overriding-header "")
        (org-agenda-files
-        (quote
-         ("work-todo.org")))))
+        '("work-todo.org"))))
      ("e" "Errands" tags-todo "ERRAND"
-      ((org-agenda-overriding-header "Errands"))))))
+      ((org-agenda-overriding-header "Errands")))))
  '(org-agenda-files
-   (quote
-    ("~/org/personal-todo.org" "~/org/professional-todo.org" "~/org/work-todo.org")))
+   '("~/org/personal-todo.org" "~/org/professional-todo.org" "~/org/work-todo.org"))
  '(org-log-into-drawer t)
- '(org-refile-allow-creating-parent-nodes (quote confirm))
- '(org-refile-targets (quote ((org-agenda-files :level . 1))))
- '(org-refile-use-outline-path (quote file))
+ '(org-refile-allow-creating-parent-nodes 'confirm)
+ '(org-refile-targets '((org-agenda-files :level . 1)))
+ '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   (quote
-    (noflet ensime sbt-mode scala-mode white-sand-theme rebecca-theme org-mime exotica-theme csv-mode olivetti flycheck-gometalinter sql-indent org-journal web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme zeal-at-point yaml-mode web-beautify smeargle orgit org-projectile org-present org-pomodoro alert log4e gntp org-download ob-elixir org mwim mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc htmlize helm-gitignore helm-dash helm-company helm-c-yasnippet go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck-mix flycheck evil-magit magit magit-popup git-commit with-editor dash async diff-hl company-tern dash-functional tern company-statistics company-go go-mode company-anaconda coffee-mode auto-yasnippet yasnippet alchemist company elixir-mode ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
- '(send-mail-function (quote smtpmail-send-it)))
+   '(terraform-mode hcl-mode winum unfill undo-tree powerline solarized-theme spinner org-category-capture madhat2r-theme hydra lv parent-mode projectile dash-docs fuzzy flycheck-credo flx highlight transient smartparens iedit anzu evil goto-chg diminish dash-at-point bind-map bind-key packed f s pkg-info epl helm avy helm-core popup noflet sbt-mode scala-mode white-sand-theme rebecca-theme org-mime exotica-theme csv-mode olivetti flycheck-gometalinter sql-indent org-journal web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme zeal-at-point yaml-mode web-beautify smeargle orgit org-projectile org-present org-pomodoro alert log4e gntp org-download ob-elixir org mwim mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc htmlize helm-gitignore helm-dash helm-company helm-c-yasnippet go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck-mix flycheck evil-magit magit magit-popup git-commit with-editor dash async diff-hl company-tern dash-functional tern company-statistics company-go go-mode company-anaconda coffee-mode auto-yasnippet yasnippet alchemist company elixir-mode ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))
+ '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "#1c1c1c" :foreground "#d7d7d7")))))
+ '(default ((t (:background nil)))))
