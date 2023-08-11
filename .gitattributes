@@ -1,3 +1,6 @@
 # Automatically normalize line endings for all text-based files
 #* text=auto
 # Disabled because of https://github.com/mathiasbynens/dotfiles/issues/149 :(
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
