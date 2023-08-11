@@ -77,7 +77,8 @@ if $TERM =~ '^xterm\\|rxvt\\|screen'
 endif
 
 " let base16colorspace=256
-colorscheme base16-default-dark
+"colorscheme base16-default-dark
+colorscheme monokai
 " }}}
 " Make Vim more useful
 set nocompatible
