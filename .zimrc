@@ -17,13 +17,15 @@ zmodule utility
 #
 # Prompt
 #
+# Exposes to prompts how long the last command took to execute, used by asciiship.
+zmodule duration-info
 # Exposes git repository status information to prompts.
 zmodule git-info
-# A customizable version of steeef's prompt theme.
-zmodule steeef
+# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
+zmodule asciiship
 
 # Additional completion definitions for Zsh.
-zmodule zsh-users/zsh-completions
+zmodule zsh-users/zsh-completions --fpath src
 # Enables and configures smart and extensive tab completion.
 # completion must be sourced after zsh-users/zsh-completions
 zmodule completion
@@ -63,6 +65,8 @@ zmodules=(directory environment git git-info history input utility custom
 #
 
 # Set your desired prompt here
+echo ".zimrc (start)"
+zmodule steeef
 zprompt_theme='steeef'
 
 #
@@ -135,102 +139,6 @@ zhighlighters=(main brackets cursor)
 
 # Load any helper scripts as defined here
 #zpacman_helper=(aur)
-#################
-# CORE SETTINGS #
-#################
-
-#
-# Zim settings
-#
-
-# Select what modules you would like enabled.
-# The second line of modules may depend on options set by modules in the first line.
-# These dependencies are noted on the respective module's README.md.
-zmodules=(directory environment
-					git git-info history input utility meta custom
-          syntax-highlighting history-substring-search prompt
-					completion pacman)
-
-
-###################
-# MODULE SETTINGS #
-###################
-
-#
-# Prompt
-#
-
-# Set your desired prompt here
-zprompt_theme='steeef'
-#zprompt_theme='eriner'
-#zprompt_theme='minimal'
-
-#
-# Completion
-#
-
-# set an optional host-specific filename for the completion cache file
-# if none is provided, the default '.zcompdump' is used.
-#zcompdump_file=".zcompdump-${HOST}-${ZSH_VERSION}"
-
-#
-# Utility
-#
-
-# Uncomment to enable command correction prompts
-# See: http://zsh.sourceforge.net/Doc/Release/Options.html#Input_002fOutput
-#setopt CORRECT
-
-#
-# Environment
-#
-
-# Set the string below to the desired terminal title format string.
-# The terminal title is redrawn upon directory change, however, variables like
-# ${PWD} are only evaluated once. Use prompt expansion strings for dynamic data:
-#   http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# The example below uses the following format: 'username@host:/current/directory'
-ztermtitle='%n@%m:%~'
-
-#
-# Input
-#
-
-# Uncomment to enable double-dot expansion.
-# This appends '../' to your input for each '.' you type after an initial '..'
-#zdouble_dot_expand='true'
-# Supposedly this will set the default vi mode to cmd
-#zle_default_mode='cmd'
-
-#
-# Syntax-Highlighting
-#
-
-# This determines what highlighters will be used with the syntax-highlighting module.
-# Documentation of the highlighters can be found here:
-#   https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-# For (u)rxvt, termite and gnome-terminal users,
-# removing the 'cursor' highlighter will fix the disappearing cursor problem
-zhighlighters=(main brackets)
-
-
-#
-# SSH
-#
-
-# Load these ssh identities with the ssh module
-#zssh_ids=(id_rsa)
-
-
-#
-# Pacman
-#
-
-# Set (optional) pacman front-end.
-#zpacman_frontend='powerpill'
-
-# Load any helper scripts as defined here
-#zpacman_helper=(aur)
 
 # Use the vicmd keymap by default
 bindkey -v
@@ -256,7 +164,7 @@ bindkey -M vicmd -s ',s' 'kIsudo A'
 
 alias gll='git log --oneline --graph --decorate'
 alias relmerge='git merge --no-ff --edit --no-commit develop'
-alias mutt='cd ~/Downloads && mutt'
+#alias mutt='cd ~/Downloads && mutt'
 
 
 export HISTSIZE=10000
@@ -274,8 +182,6 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
 
 source ~/.exports
 # Get week number
@@ -288,9 +194,9 @@ alias ls="ls --hide='*.pyc' --color -F"
 alias l="ls -lh --hide='*pyc' --color -F"
 
 
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
-eval `keychain --eval --agents ssh id_rsa`
+#eval `keychain --eval --agents ssh id_rsa`
 
 # Why does this function needs to be sourced in again to come into effect
 # Start with beam shape cursor on zsh startup and after every command.
@@ -300,11 +206,7 @@ function zle-line-init {
 
 zle -N zle-line-init
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/hapeha/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/home/hapeha/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/hapeha/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/hapeha/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+echo ".zimrc processed"

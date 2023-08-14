@@ -2,19 +2,24 @@
 # Make vim the default editor.
 export EDITOR='vim';
 
+if [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ]; then
+# Only for WSL on windows
+    export BROWSER=wslview
+fi
+
 # Enable persistent REPL history for `node`.
-export NODE_REPL_HISTORY=~/.node_history;
+#export NODE_REPL_HISTORY=~/.node_history;
 # Allow 32³ entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE='32768';
+#export NODE_REPL_HISTORY_SIZE='32768';
 # Use sloppy mode by default, matching web browsers.
-export NODE_REPL_MODE='sloppy';
+#export NODE_REPL_MODE='sloppy';
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8';
+#export PYTHONIOENCODING='UTF-8';
 
 # Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
+#export HISTSIZE='32768';
+#export HISTFILESIZE="${HISTSIZE}";
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 
@@ -27,6 +32,7 @@ export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
 export XDG_CONFIG_HOME=~/.config/
 
 
@@ -34,51 +40,14 @@ export XDG_CONFIG_HOME=~/.config/
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-LESSPIPE=`which src-hilite-lesspipe.sh`
+LESSPIPE=`which source-highlight`
 export LESSOPEN="| ${LESSPIPE} %s"
 export LESS=" -R -X -F"
 
 
 # Set up golang
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# export GOPATH=$HOME/go
+# export GOROOT=/usr/local/go
+# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# Set up HOME paths for EMR Tools
-export HADOOP_HOME=~/opt/hadoop-2.7.2
-export HIVE_HOME=~/opt/apache-hive-1.2.1-bin
-
-export SPARK_HOME=~/Applications/spark-2.4.3-bin-spark-2.4.3-bin-hadoop2.8
-export MAVEN_HOME=~/Applications/apache-maven-3.6.0
-export GLUE_HOME=~/repos/github.com/awslabs/aws-glue-libs
-export NODE_HOME=~/opt/node-v8.9.2-linux-x64
-
-# Add EMR tools to path
-export PATH=$GLUE_HOME/bin:$MAVEN_HOME/bin:$SPARK_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$NODE_HOME/bin:$PATH:$HOME/.local/bin
-
-#export PYTHONPATH=$SPARK_HOME/python/pyspark:$SPARK_HOME/python/lib/py4j-0.9-src.zip
-
-# Add Mutt to execution path
-# export PATH=$PATH:~/.mutt/
-
-# Make sure that when we run pyspark, we start a jupyter notebook to explore data
-#export PYSPARK_DRIVER_PYTHON=jupyter
-#export PYSPARK_DRIVER_PYTHON_OPTS="notebook --NotebookApp.open_browser=False --NotebookApp.ip='*' --NotebookApp.port=8880"
-
-
-#source $EMR_PROJECT_DIR/.alias
-export RESTIC_REPOSITORY=s3:s3.amazonaws.com/hapeha-work-computer-backup
-
-export JAVA_HOME=$(/usr/libexec/java_home -v1.8)
-export PATH=$JAVA_HOME/bin:$PATH
-export JAVA_TOOL_OPTIONS=-Djavax.net.ssl.trustStore=/Library/Java/Home/lib/security/cacerts
-# Could try to set the following as well -Djavax.net.ssl.trustStoreType=KeychainStore
-
-# Make sure the curl version from brew is the one that is installed (comes with keychain support)
-export PATH="/usr/local/bin:/usr/local/opt/curl/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-export AWS_DEFAULT_PROFILE=production-dwh
-export ZK_HOSTS=z-2.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:2181,z-3.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:2181,z-1.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:2181
-export BOOTSTRAP_SERVERS=b-1.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:9092,b-3.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:9092,b-2.cdccluster.lsp5fx.c4.kafka.eu-west-1.amazonaws.com:9092
+echo ".exports procesed"
