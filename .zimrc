@@ -40,6 +40,7 @@ zmodule zsh-users/zsh-history-substring-search
 # }}} End configuration added by Zim install
 
 
+echo ".zimrc (start)"
 
 #################
 # CORE SETTINGS #
@@ -65,7 +66,6 @@ zmodules=(directory environment git git-info history input utility custom
 #
 
 # Set your desired prompt here
-echo ".zimrc (start)"
 zmodule steeef
 zprompt_theme='steeef'
 
@@ -162,36 +162,6 @@ bindkey -M vicmd -s 's' 'Isudo A'
 # Prepend the previous command with sudo
 bindkey -M vicmd -s ',s' 'kIsudo A'
 
-alias gll='git log --oneline --graph --decorate'
-alias relmerge='git merge --no-ff --edit --no-commit develop'
-#alias mutt='cd ~/Downloads && mutt'
-
-
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-#setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
-#setopt SHARE_HISTORY             # Share history between all sessions.
-setopt INC_APPEND_HISTORY_TIME
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
-setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-setopt HIST_BEEP                 # Beep when accessing nonexistent history.
-
-source ~/.exports
-# Get week number
-alias week='date +%V'
-# URL-encode strings
-alias urlencode='python -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]));"'
-alias urldecode='python -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]));"'
-
-alias ls="ls --hide='*.pyc' --color -F"
-alias l="ls -lh --hide='*pyc' --color -F"
 
 
 #export TERM=xterm-256color

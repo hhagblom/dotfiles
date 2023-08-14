@@ -1,13 +1,6 @@
+# Prefer US English and use UTF-8.
+#export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
 
 echo ".zprofile processed"
 
-#export PATH="$HOME/bin:$PYENV_ROOT/bin:$PATH"
-#eval "$(pyenv init --path)"
-
-#export BROWSER=wslview
-#export EDITOR=vim
-
-#keychain $HOME/.ssh/eletive
-#keychain $HOME/.ssh/id_ed25519
-
-#source $HOME/.keychain/$HOST-sh
