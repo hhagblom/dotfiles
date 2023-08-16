@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 # Make vim the default editor.
-echo ".export start"
+#echo ".export start"
+
 export EDITOR=vim
 
 if [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ]; then
 # Only for WSL on windows
     export BROWSER=wslview
 fi
+
+export PAGER='less -X'
 
 # Enable persistent REPL history for `node`.
 #export NODE_REPL_HISTORY=~/.node_history;
@@ -48,4 +51,4 @@ export LESS=" -R -X -F"
 # export GOROOT=/usr/local/go
 # export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-echo ".exports procesed"
+# echo ".exports procesed"

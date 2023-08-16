@@ -5,4 +5,4 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 
-echo ".zshenv processed"
+#echo ".zshenv processed"
