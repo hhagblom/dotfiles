@@ -1,8 +1,8 @@
 #echo ".zlogin (start)"
-keychain -q $HOME/.ssh/eletive
-keychain -q $HOME/.ssh/id_ed25519
+#keychain -q $HOME/.ssh/eletive
+#keychain -q $HOME/.ssh/id_ed25519
 
-source $HOME/.keychain/$HOST-sh
+#source $HOME/.keychain/$HOST-sh
 
 # Used for debugging purposes
 # echo "PATH=$PATH"

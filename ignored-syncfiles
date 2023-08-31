@@ -14,4 +14,6 @@ bootstrap\.sh
 install\.sh
 README\.md
 LICENSE-MIT\.txt
+ubuntu_install\.sh
+fedora_install\.sh
 ^$
