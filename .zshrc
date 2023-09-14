@@ -128,5 +128,11 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
-source .exports
+source ~/.exports
+export PATH="$HOME/bin:$PATH"
+export AWS_DEFAULT_PROFILE=saml
 
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
+complete -C '/usr/local/bin/aws_completer' aws

@@ -129,7 +129,7 @@
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = false
+	gpgsign = true
 
 [diff]
 
@@ -144,19 +144,21 @@
 [help]
 
 	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+	autocorrect = 0
 
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	ff = no
+	commit = no
 
 [push]
 
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = current
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
@@ -184,7 +186,11 @@
 
 [user]
 	name = Hans Peter Hagblom
-	email = hagblom.hp@outlook.com
+	email = Hans.PeterHagblom@aerlingus.com
+	signingkey = 91FD485D06A473A3
 [credential]
 	helper = !aws --profile personal codecommit credential-helper $@
 	UseHttpPath = true
+[pull]
+	ff = yes
+	rebase = yes
