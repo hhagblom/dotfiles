@@ -7,6 +7,8 @@ export EDITOR=vim
 if [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ]; then
 # Only for WSL on windows
     export BROWSER=wslview
+    # Make sure we can pop up password prompts properly with GPG
+    export GPG_TTY=$(tty)
 fi
 
 export PAGER='less -X'

@@ -186,7 +186,7 @@
 
 [user]
 	name = Hans Peter Hagblom
-	email = Hans.PeterHagblom@aerlingus.com
+	email = hagblom.hp@outlook.com
 	signingkey = 91FD485D06A473A3
 [credential]
 	helper = !aws --profile personal codecommit credential-helper $@
