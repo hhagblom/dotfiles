@@ -30,7 +30,7 @@ Plug 'rking/ag.vim'
 Plug 'davidhalter/jedi-vim'
 call plug#end()
 " }}}
-set shell=bash
+set shell=zsh
 " {{{  Airline fonts
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
@@ -84,6 +84,7 @@ colorscheme monokai
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
+
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode

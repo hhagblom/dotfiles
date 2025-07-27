@@ -136,3 +136,7 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 complete -C '/usr/local/bin/aws_completer' aws
+
+. "$HOME/.local/bin/env"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit

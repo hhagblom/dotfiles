@@ -43,8 +43,8 @@ export MANPAGER='less -X';
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-LESSPIPE=`which source-highlight`
-export LESSOPEN="| ${LESSPIPE} %s"
+#LESSPIPE=`which source-highlight`
+#export LESSOPEN="| ${LESSPIPE} %s"
 export LESS=" -R -X -F"
 
 
